@@ -1,0 +1,14 @@
+# Binary files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Vendor folder
+/vendor/
+
+# IDE files
+*.swp
+.vscode/
+.idea/
