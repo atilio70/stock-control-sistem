@@ -1,11 +1,11 @@
 package main
 
-imporr (
-	"github.com/gin-gonic/gin"
+import (
 	"github.com/atilio70/stock-control-sistem/backend/internal/database"
+	"github.com/gin-gonic/gin"
 )
 
-//main is the entry point of the application
+// main is the entry point of the application
 func main() {
 	//Initialize the database conection
 	database.Connect()
@@ -14,7 +14,7 @@ func main() {
 	router := gin.Default()
 
 	//simple test route
-	reoter.GET("/ping", func (c *gin.Context) {
+	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})

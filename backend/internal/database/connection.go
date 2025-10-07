@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -13,10 +13,10 @@ var DB *gorm.DB
 // Connect initializes the MySQL database connection
 func Connect() {
 	//Change usernames, password, host, and database name accordingly
-	dsn := "user:password@tcp(127.0.0.1.3306)/gestion_db?charset=utf8mb4&parseTime=Tru&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	dsn := "host=localhost user=usuario_app password=miNuevaPassword dbname=gestion_db port=5432 sslmode=disable TimeZone=America/Argentina/Buenos_Aires"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatal("Error connecting to the databse: ", err)
+		log.Fatal("Error connecting to the database: ", err)
 	}
 
 	DB = db
