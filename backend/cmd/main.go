@@ -1,7 +1,10 @@
 package main
 
 import (
+	"log"
+
 	"github.com/atilio70/stock-control-sistem/backend/internal/database"
+	"github.com/atilio70/stock-control-sistem/backend/internal/handlers"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +16,17 @@ func main() {
 	//create a Gin router
 	router := gin.Default()
 
-	//simple test route
+	//Products routes
+	productRoutes := router.Group("/api/products")
+	{
+		productRoutes.GET("/", handlers.GetProducts)         //List all products
+		productRoutes.GET("/:id", handlers.GetProductByID)   //Get a product by ID
+		productRoutes.POST("/", handlers.CreateProduct)      //Create a product
+		productRoutes.PUT("/:id", handlers.UpdateProduct)    //Update a product
+		productRoutes.DELETE("/:id", handlers.DeleteProduct) //Delete a product
+	}
+
+	//simple test endpoint
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
@@ -21,5 +34,6 @@ func main() {
 	})
 
 	//Start the server on port 8080
+	log.Println("Listening and serving HTTP on :8080")
 	router.Run(":8080")
 }
