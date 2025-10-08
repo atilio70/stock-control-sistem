@@ -3,6 +3,7 @@ package database
 import (
 	"log"
 
+	"github.com/atilio70/stock-control-sistem/backend/internal/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -20,4 +21,15 @@ func Connect() {
 	}
 
 	DB = db
+
+	//Auto-migrate database tables
+	err = db.AutoMigrate(
+		&models.Product{},
+		&models.Client{},
+		&models.Supplier{},
+		&models.Sale{},
+	)
+	if err != nil {
+		log.Fatal("[error] failed to migrate database: ", err)
+	}
 }
