@@ -26,6 +26,16 @@ func main() {
 		productRoutes.DELETE("/:id", handlers.DeleteProduct) //Delete a product
 	}
 
+	//Clients routes
+	clientRoutes := router.Group("/api/clients")
+	{
+		clientRoutes.GET("/", handlers.GetClients)         //List all products
+		clientRoutes.GET("/:id", handlers.GetClientsByID)  //Get a client by ID
+		clientRoutes.POST("/", handlers.CreateClient)      //Create a new client
+		clientRoutes.PUT("/:id", handlers.UpdateClient)    //Update client
+		clientRoutes.DELETE("/:id", handlers.DeleteClient) //Delete a clients
+	}
+
 	//simple test endpoint
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
